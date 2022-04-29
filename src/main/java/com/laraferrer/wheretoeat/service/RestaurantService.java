@@ -11,4 +11,5 @@ public interface RestaurantService {
     Restaurant addRestaurant(Restaurant restaurant);
     Restaurant modifyRestaurant(long restaurantId, Restaurant restaurant) throws RestaurantNotFoundException;
     void patchRestaurant(long restaurantId, RestaurantPatchDTO restaurantPatchDTO) throws RestaurantNotFoundException;
+    void deleteRestaurantById(long restaurantId) throws RestaurantNotFoundException;
 }

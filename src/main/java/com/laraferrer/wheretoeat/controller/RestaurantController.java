@@ -45,4 +45,10 @@ public class RestaurantController {
         restaurantService.patchRestaurant(restaurantId, restaurantPatchDTO);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(value = "/restaurant/{restaurantId}")
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable long restaurantId) throws RestaurantNotFoundException {
+        restaurantService.deleteRestaurantById(restaurantId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
