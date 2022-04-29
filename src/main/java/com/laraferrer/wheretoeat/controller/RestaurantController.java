@@ -1,6 +1,7 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
+import com.laraferrer.wheretoeat.dto.RestaurantPatchDTO;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,11 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> modifyRestaurant(@PathVariable long restaurantId, @RequestBody Restaurant restaurant) throws RestaurantNotFoundException {
         Restaurant newRestaurant = restaurantService.modifyRestaurant(restaurantId, restaurant);
         return new ResponseEntity<>(newRestaurant, HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/restaurant/{restaurantId}")
+    public ResponseEntity<Void> patchRestaurant(@PathVariable long restaurantId, @RequestBody RestaurantPatchDTO restaurantPatchDTO) throws RestaurantNotFoundException {
+        restaurantService.patchRestaurant(restaurantId, restaurantPatchDTO);
+        return ResponseEntity.noContent().build();
     }
 }

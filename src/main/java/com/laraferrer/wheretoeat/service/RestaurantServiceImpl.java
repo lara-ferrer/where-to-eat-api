@@ -3,6 +3,7 @@ package com.laraferrer.wheretoeat.service;
 import com.laraferrer.wheretoeat.domain.Restaurant;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import com.laraferrer.wheretoeat.repository.RestaurantRepository;
+import com.laraferrer.wheretoeat.dto.RestaurantPatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,31 @@ public class RestaurantServiceImpl implements RestaurantService {
         newRestaurant.setCategoryId(restaurant.getCategoryId());
 
         return restaurantRepository.save(newRestaurant);
+    }
+
+    @Override
+    public void patchRestaurant(long restaurantId, RestaurantPatchDTO restaurantPatchDTO) throws RestaurantNotFoundException {
+        Restaurant newRestaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(RestaurantNotFoundException::new);
+        if (restaurantPatchDTO.getKey().equals("name")) {
+            newRestaurant.setName(restaurantPatchDTO.getValue());
+        }
+        if (restaurantPatchDTO.getKey().equals("address")) {
+            newRestaurant.setAddress(restaurantPatchDTO.getValue());
+        }
+        if (restaurantPatchDTO.getKey().equals("city")) {
+            newRestaurant.setName(restaurantPatchDTO.getValue());
+        }
+        if (restaurantPatchDTO.getKey().equals("phone")) {
+            newRestaurant.setName(restaurantPatchDTO.getValue());
+        }
+        if (restaurantPatchDTO.getKey().equals("email")) {
+            newRestaurant.setName(restaurantPatchDTO.getValue());
+        }
+        if (restaurantPatchDTO.getKey().equals("categoryId")) {
+            newRestaurant.setCategoryId(Integer.parseInt(restaurantPatchDTO.getValue()));
+        }
+
+        restaurantRepository.save(newRestaurant);
     }
 }
