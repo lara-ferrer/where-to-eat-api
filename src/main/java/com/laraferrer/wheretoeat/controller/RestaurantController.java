@@ -32,4 +32,10 @@ public class RestaurantController {
         Restaurant newRestaurant = restaurantService.addRestaurant(restaurant);
         return new ResponseEntity<>(newRestaurant, HttpStatus.CREATED);
     }
+
+    @PutMapping(value = "/restaurant/{restaurantId}")
+    public ResponseEntity<Restaurant> modifyRestaurant(@PathVariable long restaurantId, @RequestBody Restaurant restaurant) throws RestaurantNotFoundException {
+        Restaurant newRestaurant = restaurantService.modifyRestaurant(restaurantId, restaurant);
+        return new ResponseEntity<>(newRestaurant, HttpStatus.OK);
+    }
 }
