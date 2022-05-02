@@ -24,3 +24,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: wheretoeat-0.0.1-SNAPSHOT.jar
+        path: /home/runner/work/where-to-eat-api/where-to-eat-api/target/wheretoeat-0.0.1-SNAPSHOT.jar
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: where-to-eat-api
+        path: /home/runner/work/where-to-eat-api/
