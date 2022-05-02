@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.laraferrer.wheretoeat</groupId>
 	<artifactId>wheretoeat</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>wheretoeat</name>
 	<description>API made for a application that shows users an available list of restaurants on the city of their choose.</description>
 	<properties>
