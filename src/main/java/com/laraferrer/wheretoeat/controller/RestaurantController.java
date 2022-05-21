@@ -21,7 +21,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping(value = "/restaurant")
-    public ResponseEntity<List<Restaurant>> getProducts() {
+    public ResponseEntity<List<Restaurant>> getRestaurants() {
         List<Restaurant> restaurants = null;
         restaurants = restaurantService.findAllRestaurants();
 
