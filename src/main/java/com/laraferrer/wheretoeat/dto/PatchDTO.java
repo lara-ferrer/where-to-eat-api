@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestaurantPatchDTO {
+public class PatchDTO {
     private String key;
     private String value;
 }
