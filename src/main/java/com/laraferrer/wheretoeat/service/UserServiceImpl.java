@@ -1,6 +1,7 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.User;
+import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.repository.UserRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
@@ -17,6 +18,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDTO findUsernameById(long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(user.getUsername());
+
+        return userDTO;
     }
 
     @Override
