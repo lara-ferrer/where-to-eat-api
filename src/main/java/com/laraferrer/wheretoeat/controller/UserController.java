@@ -1,7 +1,9 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.User;
+import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
+import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.service.UserService;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,13 @@ public class UserController {
         users = userService.findAllUsers();
 
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping(value = "/user/{userId}")
+    public ResponseEntity<UserDTO> getUsernameById(@PathVariable long userId) throws UserNotFoundException {
+        UserDTO userDTO = userService.findUsernameById(userId);
+
+        return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping(value = "/user")
@@ -46,5 +55,17 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable long userId) throws UserNotFoundException {
         userService.deleteUserById(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(UserNotFoundException userNotFoundException) {
+        ErrorResponse errorResponse = new ErrorResponse(101, userNotFoundException.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse(102, "Error interno del servidor.");
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
