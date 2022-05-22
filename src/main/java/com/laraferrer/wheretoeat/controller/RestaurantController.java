@@ -1,13 +1,9 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
-import com.laraferrer.wheretoeat.dto.RestaurantPatchDTO;
+import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +37,8 @@ public class RestaurantController {
     }
 
     @PatchMapping(value = "/restaurant/{restaurantId}")
-    public ResponseEntity<Void> patchRestaurant(@PathVariable long restaurantId, @RequestBody RestaurantPatchDTO restaurantPatchDTO) throws RestaurantNotFoundException {
-        restaurantService.patchRestaurant(restaurantId, restaurantPatchDTO);
+    public ResponseEntity<Void> patchRestaurant(@PathVariable long restaurantId, @RequestBody PatchDTO patchDTO) throws RestaurantNotFoundException {
+        restaurantService.patchRestaurant(restaurantId, patchDTO);
         return ResponseEntity.noContent().build();
     }
 
