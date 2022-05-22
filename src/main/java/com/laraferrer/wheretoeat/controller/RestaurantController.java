@@ -3,6 +3,8 @@ package com.laraferrer.wheretoeat.controller;
 import com.laraferrer.wheretoeat.domain.Restaurant;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
+import com.laraferrer.wheretoeat.dto.RestaurantDTO;
+import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
@@ -24,6 +26,13 @@ public class RestaurantController {
         restaurants = restaurantService.findAllRestaurants();
 
         return ResponseEntity.ok(restaurants);
+    }
+
+    @GetMapping(value = "/restaurant/{restaurantId}")
+    public ResponseEntity<RestaurantDTO> getNameById(@PathVariable long restaurantId) throws RestaurantNotFoundException {
+        RestaurantDTO restaurantDTO = restaurantService.findNameById(restaurantId);
+
+        return ResponseEntity.ok(restaurantDTO);
     }
 
     @PostMapping(value = "/restaurant")
