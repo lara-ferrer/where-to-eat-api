@@ -1,11 +1,8 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.City;
-import com.laraferrer.wheretoeat.domain.User;
 import com.laraferrer.wheretoeat.dto.CityDTO;
-import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.CityNotFoundException;
-import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.repository.CityRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;

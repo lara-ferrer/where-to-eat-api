@@ -2,10 +2,8 @@ package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.City;
 import com.laraferrer.wheretoeat.dto.CityDTO;
-import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
-import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 
 import java.util.List;
 
