@@ -1,6 +1,7 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.Category;
+import com.laraferrer.wheretoeat.dto.CategoryDTO;
 import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
 import com.laraferrer.wheretoeat.repository.CategoryRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
@@ -17,6 +18,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public CategoryDTO findNameById(long categoryId) throws CategoryNotFoundException {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(CategoryNotFoundException::new);
+
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setName(category.getName());
+
+        return categoryDTO;
     }
 
     @Override
