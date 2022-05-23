@@ -1,6 +1,7 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.Category;
+import com.laraferrer.wheretoeat.dto.CategoryDTO;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
@@ -24,6 +25,13 @@ public class CategoryController {
         categories = categoryService.findAllCategories();
 
         return ResponseEntity.ok(categories);
+    }
+
+    @GetMapping(value = "/category/{categoryId}")
+    public ResponseEntity<CategoryDTO> getNameById(@PathVariable long categoryId) throws CategoryNotFoundException {
+        CategoryDTO categoryDTO = categoryService.findNameById(categoryId);
+
+        return ResponseEntity.ok(categoryDTO);
     }
 
     @PostMapping(value = "/category")
