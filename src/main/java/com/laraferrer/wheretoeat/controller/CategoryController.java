@@ -5,7 +5,6 @@ import com.laraferrer.wheretoeat.dto.CategoryDTO;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
-import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
