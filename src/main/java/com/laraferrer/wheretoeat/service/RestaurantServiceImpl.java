@@ -1,11 +1,8 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
-import com.laraferrer.wheretoeat.domain.User;
 import com.laraferrer.wheretoeat.dto.RestaurantDTO;
-import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
-import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.repository.RestaurantRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;

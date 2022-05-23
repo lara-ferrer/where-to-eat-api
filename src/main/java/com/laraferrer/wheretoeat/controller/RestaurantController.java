@@ -4,8 +4,6 @@ import com.laraferrer.wheretoeat.domain.Restaurant;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.dto.RestaurantDTO;
-import com.laraferrer.wheretoeat.dto.UserDTO;
-import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
