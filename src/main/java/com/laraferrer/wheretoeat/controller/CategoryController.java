@@ -1,8 +1,10 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.Category;
+import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
+import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,5 +48,17 @@ public class CategoryController {
     public ResponseEntity<Void> deleteCategory(@PathVariable long categoryId) throws CategoryNotFoundException {
         categoryService.deleteCategoryById(categoryId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(CategoryNotFoundException categoryNotFoundException) {
+        ErrorResponse errorResponse = new ErrorResponse(101, categoryNotFoundException.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse(102, "Error interno del servidor.");
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
