@@ -1,7 +1,11 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.City;
+import com.laraferrer.wheretoeat.domain.User;
+import com.laraferrer.wheretoeat.dto.CityDTO;
+import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.CityNotFoundException;
+import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.repository.CityRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,17 @@ public class CityServiceImpl implements CityService {
     @Override
     public List<City> findAllCities() {
         return cityRepository.findAll();
+    }
+
+    @Override
+    public CityDTO findNameById(long cityId) throws CityNotFoundException {
+        City city = cityRepository.findById(cityId)
+                .orElseThrow(CityNotFoundException::new);
+
+        CityDTO cityDTO = new CityDTO();
+        cityDTO.setName(city.getName());
+
+        return cityDTO;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.City;
+import com.laraferrer.wheretoeat.dto.CityDTO;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
+import com.laraferrer.wheretoeat.dto.UserDTO;
+import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import com.laraferrer.wheretoeat.service.CityService;
 import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,13 @@ public class CityController {
         cities = cityService.findAllCities();
 
         return ResponseEntity.ok(cities);
+    }
+
+    @GetMapping(value = "/city/{cityId}")
+    public ResponseEntity<CityDTO> getNameById(@PathVariable long cityId) throws CityNotFoundException {
+        CityDTO cityDTO = cityService.findNameById(cityId);
+
+        return ResponseEntity.ok(cityDTO);
     }
 
     @PostMapping(value = "/city")
