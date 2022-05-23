@@ -66,8 +66,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void deleteRestaurantById(long productId) throws RestaurantNotFoundException {
-        Restaurant restaurant = restaurantRepository.findById(productId)
+    public void deleteRestaurantById(long restaurantId) throws RestaurantNotFoundException {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
         restaurantRepository.delete(restaurant);
     }
