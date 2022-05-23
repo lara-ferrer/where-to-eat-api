@@ -1,7 +1,9 @@
 package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
+import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
+import com.laraferrer.wheretoeat.dto.RestaurantDTO;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,13 @@ public class RestaurantController {
         restaurants = restaurantService.findAllRestaurants();
 
         return ResponseEntity.ok(restaurants);
+    }
+
+    @GetMapping(value = "/restaurant/{restaurantId}")
+    public ResponseEntity<RestaurantDTO> getNameById(@PathVariable long restaurantId) throws RestaurantNotFoundException {
+        RestaurantDTO restaurantDTO = restaurantService.findNameById(restaurantId);
+
+        return ResponseEntity.ok(restaurantDTO);
     }
 
     @PostMapping(value = "/restaurant")
@@ -46,5 +55,17 @@ public class RestaurantController {
     public ResponseEntity<Void> deleteRestaurant(@PathVariable long restaurantId) throws RestaurantNotFoundException {
         restaurantService.deleteRestaurantById(restaurantId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(RestaurantNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(RestaurantNotFoundException restaurantNotFoundException) {
+        ErrorResponse errorResponse = new ErrorResponse(101, restaurantNotFoundException.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse(102, "Error interno del servidor.");
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

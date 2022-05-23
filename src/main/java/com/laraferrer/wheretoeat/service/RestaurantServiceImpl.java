@@ -1,6 +1,7 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
+import com.laraferrer.wheretoeat.dto.RestaurantDTO;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import com.laraferrer.wheretoeat.repository.RestaurantRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
@@ -17,6 +18,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Restaurant> findAllRestaurants() {
         return restaurantRepository.findAll();
+    }
+
+    @Override
+    public RestaurantDTO findNameById(long restaurantId) throws RestaurantNotFoundException {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(RestaurantNotFoundException::new);
+
+        RestaurantDTO restaurantDTO = new RestaurantDTO();
+        restaurantDTO.setName(restaurant.getName());
+
+        return restaurantDTO;
     }
 
     @Override
