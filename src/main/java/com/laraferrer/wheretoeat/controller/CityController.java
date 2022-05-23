@@ -2,6 +2,7 @@ package com.laraferrer.wheretoeat.controller;
 
 import com.laraferrer.wheretoeat.domain.City;
 import com.laraferrer.wheretoeat.dto.CityDTO;
+import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.dto.UserDTO;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
@@ -56,5 +57,17 @@ public class CityController {
     public ResponseEntity<Void> deleteCity(@PathVariable long cityId) throws CityNotFoundException {
         cityService.deleteCityById(cityId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(CityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(CityNotFoundException cityNotFoundException) {
+        ErrorResponse errorResponse = new ErrorResponse(101, cityNotFoundException.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse(102, "Error interno del servidor.");
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
