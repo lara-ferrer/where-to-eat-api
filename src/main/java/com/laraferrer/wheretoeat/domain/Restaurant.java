@@ -21,11 +21,11 @@ public class Restaurant {
     @Column
     private String address;
     @Column
-    private String city;
-    @Column
     private String phone;
     @Column
     private String email;
+    @Column
+    private int cityId;
     @Column
     private int categoryId;
 }
