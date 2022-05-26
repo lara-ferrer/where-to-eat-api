@@ -1,13 +1,13 @@
 package com.laraferrer.wheretoeat.service;
 
 import com.laraferrer.wheretoeat.domain.Restaurant;
+import com.laraferrer.wheretoeat.dto.RestaurantDTO;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import com.laraferrer.wheretoeat.repository.RestaurantRepository;
-import com.laraferrer.wheretoeat.dto.RestaurantPatchDTO;
+import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,6 +18,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Restaurant> findAllRestaurants() {
         return restaurantRepository.findAll();
+    }
+
+    @Override
+    public RestaurantDTO findNameById(long restaurantId) throws RestaurantNotFoundException {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(RestaurantNotFoundException::new);
+
+        RestaurantDTO restaurantDTO = new RestaurantDTO();
+        restaurantDTO.setName(restaurant.getName());
+
+        return restaurantDTO;
     }
 
     @Override
@@ -32,43 +43,43 @@ public class RestaurantServiceImpl implements RestaurantService {
         newRestaurant.setId(restaurant.getId());
         newRestaurant.setName(restaurant.getName());
         newRestaurant.setAddress(restaurant.getAddress());
-        newRestaurant.setCity(restaurant.getCity());
         newRestaurant.setPhone(restaurant.getPhone());
         newRestaurant.setEmail(restaurant.getEmail());
+        newRestaurant.setCityId(restaurant.getCityId());
         newRestaurant.setCategoryId(restaurant.getCategoryId());
 
         return restaurantRepository.save(newRestaurant);
     }
 
     @Override
-    public void patchRestaurant(long restaurantId, RestaurantPatchDTO restaurantPatchDTO) throws RestaurantNotFoundException {
+    public void patchRestaurant(long restaurantId, PatchDTO patchDTO) throws RestaurantNotFoundException {
         Restaurant newRestaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
-        if (restaurantPatchDTO.getKey().equals("name")) {
-            newRestaurant.setName(restaurantPatchDTO.getValue());
+        if (patchDTO.getKey().equals("name")) {
+            newRestaurant.setName(patchDTO.getValue());
         }
-        if (restaurantPatchDTO.getKey().equals("address")) {
-            newRestaurant.setAddress(restaurantPatchDTO.getValue());
+        if (patchDTO.getKey().equals("address")) {
+            newRestaurant.setAddress(patchDTO.getValue());
         }
-        if (restaurantPatchDTO.getKey().equals("city")) {
-            newRestaurant.setName(restaurantPatchDTO.getValue());
+        if (patchDTO.getKey().equals("phone")) {
+            newRestaurant.setName(patchDTO.getValue());
         }
-        if (restaurantPatchDTO.getKey().equals("phone")) {
-            newRestaurant.setName(restaurantPatchDTO.getValue());
+        if (patchDTO.getKey().equals("email")) {
+            newRestaurant.setName(patchDTO.getValue());
         }
-        if (restaurantPatchDTO.getKey().equals("email")) {
-            newRestaurant.setName(restaurantPatchDTO.getValue());
+        if (patchDTO.getKey().equals("cityId")) {
+            newRestaurant.setCityId(Integer.parseInt(patchDTO.getValue()));
         }
-        if (restaurantPatchDTO.getKey().equals("categoryId")) {
-            newRestaurant.setCategoryId(Integer.parseInt(restaurantPatchDTO.getValue()));
+        if (patchDTO.getKey().equals("categoryId")) {
+            newRestaurant.setCategoryId(Integer.parseInt(patchDTO.getValue()));
         }
 
         restaurantRepository.save(newRestaurant);
     }
 
     @Override
-    public void deleteRestaurantById(long productId) throws RestaurantNotFoundException {
-        Restaurant restaurant = restaurantRepository.findById(productId)
+    public void deleteRestaurantById(long restaurantId) throws RestaurantNotFoundException {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
         restaurantRepository.delete(restaurant);
     }

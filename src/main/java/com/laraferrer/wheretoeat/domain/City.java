@@ -5,13 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "restaurants")
-public class Restaurant {
+@Entity(name = "city")
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +18,5 @@ public class Restaurant {
     @Column
     private String name;
     @Column
-    private String address;
-    @Column
-    private String phone;
-    @Column
-    private String email;
-    @Column
-    private int cityId;
-    @Column
-    private int categoryId;
+    private String country;
 }
