@@ -5,17 +5,16 @@ services:
     image: where-to-eat-api
     container_name: api-pro
     ports:
-      - "8080:8080"
+      - "8082:8080"
     environment:
       spring.profiles.active: production
     depends_on:
       - db
-
   db:
     container_name: db-pro
     image: mcr.microsoft.com/azure-sql-edge:latest
     ports:
-      - 2022:1433
+      - 2023:1433
     volumes:
       - data:/var/lib/mssqlql
     environment:
@@ -24,6 +23,10 @@ services:
       - MSSQL_PID=Developer
       - MSSQL_USER=SA
       - MSSQL_TCP_PORT=1433
-
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080
 volumes:
    data-pro: {}
