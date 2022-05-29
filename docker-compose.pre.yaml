@@ -24,6 +24,7 @@ services:
       - MSSQL_USER=SA
       - MSSQL_TCP_PORT=1433
   adminer:
+    container_name: adminer-pre
     image: adminer
     restart: always
     ports:
