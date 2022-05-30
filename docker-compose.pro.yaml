@@ -3,19 +3,19 @@ services:
   api:
     build: .
     image: where-to-eat-api
-    container_name: api
+    container_name: api-pro
     ports:
-      - "2021:8080"
+      - "2022:8080"
     environment:
-      spring.profiles.active: production
+      spring.profiles.active: pro
     depends_on:
       - db
 
   db:
-    container_name: db
+    container_name: db-pro
     image: mcr.microsoft.com/azure-sql-edge:latest
     ports:
-      - 1433:1433
+      - 1434:1433
     volumes:
       - data:/var/lib/mssqlql
     environment:
@@ -26,4 +26,4 @@ services:
       - MSSQL_TCP_PORT=1433
 
 volumes:
-   data: {}
+   data-pro: {}
