@@ -10,7 +10,12 @@ services:
       spring.profiles.active: production
     depends_on:
       - db
-
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   db:
     container_name: db
     image: mcr.microsoft.com/azure-sql-edge:latest
@@ -24,6 +29,5 @@ services:
       - MSSQL_PID=Developer
       - MSSQL_USER=SA
       - MSSQL_TCP_PORT=1433
-
 volumes:
    data: {}
