@@ -12,7 +12,3 @@ The API has been developed using Spring Boot. It consumes data from a database b
 - Images:
     - API: https://hub.docker.com/repository/docker/laraferrer/wheretoeat-api
     - BBDD: https://hub.docker.com/repository/docker/laraferrer/wheretoeat-bbdd
-
-- API - production env (deployed to Azure): https://wheretoeat-api.azurewebsites.net/swagger-ui.html
-- API - staging env (deployed to Azure): https://wheretoeat-api-pre.azurewebsites.net/swagger-ui.html
-- BBDD address (deployed to Azure): 20.31.208.57
