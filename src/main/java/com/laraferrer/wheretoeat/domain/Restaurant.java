@@ -28,4 +28,8 @@ public class Restaurant {
     private int cityId;
     @Column
     private int categoryId;
+    @Column
+    private boolean isOpen;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 }

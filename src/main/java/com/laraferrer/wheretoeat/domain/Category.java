@@ -20,4 +20,8 @@ public class Category {
     private String name;
     @Column
     private String description;
+    @Column
+    private boolean isActive;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 }

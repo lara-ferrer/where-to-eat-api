@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -26,5 +27,11 @@ public class User {
     @Column
     private String telephone;
     @Column
+    private String address;
+    @Column
+    private long cityId;
+    @Column
     private int age;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 }
