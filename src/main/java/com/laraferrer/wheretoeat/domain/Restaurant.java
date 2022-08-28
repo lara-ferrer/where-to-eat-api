@@ -25,11 +25,13 @@ public class Restaurant {
     @Column
     private String email;
     @Column
-    private int cityId;
-    @Column
-    private int categoryId;
-    @Column
     private boolean isOpen;
     @Column(name = "creation_date")
     private LocalDate creationDate;
+    @ManyToOne
+    @JoinColumn(name="cityId", nullable=false)
+    City city;
+    @ManyToOne
+    @JoinColumn(name="categoryId", nullable=false)
+    Category category;
 }
