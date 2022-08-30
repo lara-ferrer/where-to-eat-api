@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long userId;
     @Column
     private String username;
     @Column
@@ -26,5 +27,12 @@ public class User {
     @Column
     private String telephone;
     @Column
+    private String address;
+    @Column
     private int age;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
+    @ManyToOne
+    @JoinColumn(name="cityId", nullable=false)
+    City city;
 }

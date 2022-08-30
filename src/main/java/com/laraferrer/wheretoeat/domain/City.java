@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +20,8 @@ public class City {
     private String name;
     @Column
     private String country;
+    @Column
+    private boolean isActive;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 }
