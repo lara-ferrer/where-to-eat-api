@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private long id;
     @Column
     private String username;
     @Column
@@ -33,6 +33,6 @@ public class User {
     @Column(name = "creation_date")
     private LocalDate creationDate;
     @ManyToOne
-    @JoinColumn(name="cityId", nullable=false)
+    @JoinColumn(name="city_id", nullable=false)
     City city;
 }
