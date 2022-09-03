@@ -50,10 +50,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         Restaurant restaurant = new Restaurant();
         restaurant.setId(restaurant.getId());
-        restaurant.setName(restaurant.getName());
-        restaurant.setAddress(restaurant.getAddress());
-        restaurant.setPhone(restaurant.getPhone());
-        restaurant.setEmail(restaurant.getEmail());
+        restaurant.setName(restaurantDTO.getName());
+        restaurant.setAddress(restaurantDTO.getAddress());
+        restaurant.setPhone(restaurantDTO.getPhone());
+        restaurant.setEmail(restaurantDTO.getEmail());
         restaurant.setCity(city);
         restaurant.setCategory(category);
         return restaurantRepository.save(restaurant);
