@@ -45,8 +45,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         newRestaurant.setAddress(restaurant.getAddress());
         newRestaurant.setPhone(restaurant.getPhone());
         newRestaurant.setEmail(restaurant.getEmail());
-        newRestaurant.setCityId(restaurant.getCityId());
-        newRestaurant.setCategoryId(restaurant.getCategoryId());
+        newRestaurant.setCity(restaurant.getCity());
+        newRestaurant.setCategory(restaurant.getCategory());
 
         return restaurantRepository.save(newRestaurant);
     }
@@ -66,12 +66,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
         if (patchDTO.getKey().equals("email")) {
             newRestaurant.setName(patchDTO.getValue());
-        }
-        if (patchDTO.getKey().equals("cityId")) {
-            newRestaurant.setCityId(Integer.parseInt(patchDTO.getValue()));
-        }
-        if (patchDTO.getKey().equals("categoryId")) {
-            newRestaurant.setCategoryId(Integer.parseInt(patchDTO.getValue()));
         }
 
         restaurantRepository.save(newRestaurant);
