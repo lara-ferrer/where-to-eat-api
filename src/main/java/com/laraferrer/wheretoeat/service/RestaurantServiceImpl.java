@@ -40,7 +40,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Restaurant modifyRestaurant(long restaurantId, Restaurant restaurant) throws RestaurantNotFoundException {
         Restaurant newRestaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
-        newRestaurant.setId(restaurant.getId());
+        newRestaurant.setRestaurantId(restaurant.getRestaurantId());
         newRestaurant.setName(restaurant.getName());
         newRestaurant.setAddress(restaurant.getAddress());
         newRestaurant.setPhone(restaurant.getPhone());
