@@ -40,7 +40,7 @@ public class CityServiceImpl implements CityService {
     public City modifyCity(long cityId, City city) throws CityNotFoundException {
         City newCity = cityRepository.findById(cityId)
                 .orElseThrow(CityNotFoundException::new);
-        newCity.setId(city.getId());
+        newCity.setCityId(city.getCityId());
         newCity.setName(city.getName());
 
         return cityRepository.save(newCity);
