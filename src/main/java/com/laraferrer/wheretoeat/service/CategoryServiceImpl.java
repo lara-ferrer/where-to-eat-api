@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category modifyCategory(long categoryId, Category category) throws CategoryNotFoundException {
         Category newCategory = categoryRepository.findById(categoryId)
                 .orElseThrow(CategoryNotFoundException::new);
-        newCategory.setId(category.getId());
+        newCategory.setCategoryId(category.getCategoryId());
         newCategory.setName(category.getName());
         newCategory.setDescription(category.getDescription());
 
