@@ -1,8 +1,14 @@
 package com.laraferrer.wheretoeat.service;
 
+import com.laraferrer.wheretoeat.domain.Category;
+import com.laraferrer.wheretoeat.domain.City;
 import com.laraferrer.wheretoeat.domain.Restaurant;
 import com.laraferrer.wheretoeat.dto.RestaurantDTO;
+import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
+import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
+import com.laraferrer.wheretoeat.repository.CategoryRepository;
+import com.laraferrer.wheretoeat.repository.CityRepository;
 import com.laraferrer.wheretoeat.repository.RestaurantRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +20,10 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
+    @Autowired
+    private CityRepository cityRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public List<Restaurant> findAllRestaurants() {
@@ -32,21 +42,38 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant addRestaurant(Restaurant restaurant) {
+    public Restaurant addRestaurant(RestaurantDTO restaurantDTO) throws CityNotFoundException, CategoryNotFoundException {
+        City city = cityRepository.findById(restaurantDTO.getCityId())
+                .orElseThrow(CityNotFoundException::new);
+        Category category = categoryRepository.findById(restaurantDTO.getCategoryId())
+                .orElseThrow(CategoryNotFoundException::new);
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(restaurant.getId());
+        restaurant.setName(restaurant.getName());
+        restaurant.setAddress(restaurant.getAddress());
+        restaurant.setPhone(restaurant.getPhone());
+        restaurant.setEmail(restaurant.getEmail());
+        restaurant.setCity(city);
+        restaurant.setCategory(category);
         return restaurantRepository.save(restaurant);
     }
 
     @Override
-    public Restaurant modifyRestaurant(long restaurantId, Restaurant restaurant) throws RestaurantNotFoundException {
+    public Restaurant modifyRestaurant(long restaurantId, RestaurantDTO restaurantDTO) throws RestaurantNotFoundException, CityNotFoundException, CategoryNotFoundException {
         Restaurant newRestaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
-        newRestaurant.setRestaurantId(restaurant.getRestaurantId());
-        newRestaurant.setName(restaurant.getName());
-        newRestaurant.setAddress(restaurant.getAddress());
-        newRestaurant.setPhone(restaurant.getPhone());
-        newRestaurant.setEmail(restaurant.getEmail());
-        newRestaurant.setCity(restaurant.getCity());
-        newRestaurant.setCategory(restaurant.getCategory());
+        City city = cityRepository.findById(restaurantDTO.getCityId())
+                .orElseThrow(CityNotFoundException::new);
+        Category category = categoryRepository.findById(restaurantDTO.getCategoryId())
+                .orElseThrow(CategoryNotFoundException::new);
+
+        newRestaurant.setName(restaurantDTO.getName());
+        newRestaurant.setAddress(restaurantDTO.getAddress());
+        newRestaurant.setPhone(restaurantDTO.getPhone());
+        newRestaurant.setEmail(restaurantDTO.getEmail());
+        newRestaurant.setCity(city);
+        newRestaurant.setCategory(category);
 
         return restaurantRepository.save(newRestaurant);
     }

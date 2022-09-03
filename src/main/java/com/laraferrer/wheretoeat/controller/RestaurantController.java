@@ -4,6 +4,8 @@ import com.laraferrer.wheretoeat.domain.Restaurant;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.dto.RestaurantDTO;
+import com.laraferrer.wheretoeat.exception.CategoryNotFoundException;
+import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import com.laraferrer.wheretoeat.service.RestaurantService;
 import com.laraferrer.wheretoeat.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +36,14 @@ public class RestaurantController {
     }
 
     @PostMapping(value = "/restaurant")
-    public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant) {
-        Restaurant newRestaurant = restaurantService.addRestaurant(restaurant);
+    public ResponseEntity<Restaurant> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) throws CategoryNotFoundException, CityNotFoundException {
+        Restaurant newRestaurant = restaurantService.addRestaurant(restaurantDTO);
         return new ResponseEntity<>(newRestaurant, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/restaurant/{restaurantId}")
-    public ResponseEntity<Restaurant> modifyRestaurant(@PathVariable long restaurantId, @RequestBody Restaurant restaurant) throws RestaurantNotFoundException {
-        Restaurant newRestaurant = restaurantService.modifyRestaurant(restaurantId, restaurant);
+    public ResponseEntity<Restaurant> modifyRestaurant(@PathVariable long restaurantId, @RequestBody RestaurantDTO restaurantDTO) throws RestaurantNotFoundException, CategoryNotFoundException, CityNotFoundException {
+        Restaurant newRestaurant = restaurantService.modifyRestaurant(restaurantId, restaurantDTO);
         return new ResponseEntity<>(newRestaurant, HttpStatus.OK);
     }
 
