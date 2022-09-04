@@ -1,19 +1,26 @@
 package com.laraferrer.wheretoeat.service;
 
+import com.laraferrer.wheretoeat.domain.City;
 import com.laraferrer.wheretoeat.domain.User;
 import com.laraferrer.wheretoeat.dto.UserDTO;
+import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
+import com.laraferrer.wheretoeat.repository.CityRepository;
 import com.laraferrer.wheretoeat.repository.UserRepository;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Column;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
     @Override
     public List<User> findAllUsers() {
@@ -21,18 +28,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findUsernameById(long userId) throws UserNotFoundException {
+    public User findUsernameById(long userId) throws UserNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername(user.getUsername());
-
-        return userDTO;
+        return user;
     }
 
     @Override
-    public User addUser(User user) {
+    public User addUser(UserDTO userDTO) throws CityNotFoundException {
+        City city = cityRepository.findById(userDTO.getCityId())
+                .orElseThrow(CityNotFoundException::new);
+
+        User user = new User();
+        user.setId(user.getId());
+        user.setUsername(userDTO.getUsername());
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setTelephone(userDTO.getTelephone());
+        user.setAge(userDTO.getAge());
+        user.setCreationDate(userDTO.getCreationDate());
+        user.setCity(city);
+
         return userRepository.save(user);
     }
 

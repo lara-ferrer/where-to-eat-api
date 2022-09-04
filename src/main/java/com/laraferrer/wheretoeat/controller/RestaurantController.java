@@ -29,10 +29,10 @@ public class RestaurantController {
     }
 
     @GetMapping(value = "/restaurant/{restaurantId}")
-    public ResponseEntity<RestaurantDTO> getNameById(@PathVariable long restaurantId) throws RestaurantNotFoundException {
-        RestaurantDTO restaurantDTO = restaurantService.findNameById(restaurantId);
+    public ResponseEntity<Restaurant> getNameById(@PathVariable long restaurantId) throws RestaurantNotFoundException {
+        Restaurant restaurant = restaurantService.findNameById(restaurantId);
 
-        return ResponseEntity.ok(restaurantDTO);
+        return ResponseEntity.ok(restaurant);
     }
 
     @PostMapping(value = "/restaurant")

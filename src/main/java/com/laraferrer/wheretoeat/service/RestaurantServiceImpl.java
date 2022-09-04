@@ -31,14 +31,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantDTO findNameById(long restaurantId) throws RestaurantNotFoundException {
+    public Restaurant findNameById(long restaurantId) throws RestaurantNotFoundException {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(RestaurantNotFoundException::new);
 
-        RestaurantDTO restaurantDTO = new RestaurantDTO();
-        restaurantDTO.setName(restaurant.getName());
-
-        return restaurantDTO;
+        return restaurant;
     }
 
     @Override
