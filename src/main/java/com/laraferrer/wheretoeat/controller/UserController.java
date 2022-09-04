@@ -4,6 +4,7 @@ import com.laraferrer.wheretoeat.domain.User;
 import com.laraferrer.wheretoeat.dto.ErrorResponse;
 import com.laraferrer.wheretoeat.dto.PatchDTO;
 import com.laraferrer.wheretoeat.dto.UserDTO;
+import com.laraferrer.wheretoeat.exception.CityNotFoundException;
 import com.laraferrer.wheretoeat.service.UserService;
 import com.laraferrer.wheretoeat.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<UserDTO> getUsernameById(@PathVariable long userId) throws UserNotFoundException {
-        UserDTO userDTO = userService.findUsernameById(userId);
+    public ResponseEntity<User> getUsernameById(@PathVariable long userId) throws UserNotFoundException {
+        User user = userService.findUsernameById(userId);
 
-        return ResponseEntity.ok(userDTO);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping(value = "/user")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User newUser = userService.addUser(user);
+    public ResponseEntity<User> addUser(@RequestBody UserDTO userDTO) throws CityNotFoundException {
+        User newUser = userService.addUser(userDTO);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
