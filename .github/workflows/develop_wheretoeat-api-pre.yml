@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - wheretoeat-api-pre
+name: Build and deploy to DEV environment in Azure
 
 on:
   push:
@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'wheretoeat-api-pre'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_962A3CCE039345BFB932F3381E8ED98A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C38DA2C8E90C4A58811289C9E92A2EE3 }}
           package: '*.jar'

@@ -29,9 +29,9 @@ public class Restaurant {
     @Column(name = "creation_date")
     private LocalDate creationDate;
     @ManyToOne
-    @JoinColumn(name="cityId", nullable=false)
+    @JoinColumn(name="city_id", nullable=false)
     City city;
     @ManyToOne
-    @JoinColumn(name="categoryId", nullable=false)
+    @JoinColumn(name="category_id", nullable=false)
     Category category;
 }
